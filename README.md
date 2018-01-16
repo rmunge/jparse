@@ -1,5 +1,9 @@
 # jparse
-Simple Java library which provides exception-free alternatives to OpenJDKs Integer.valueOf, Double.valueOf and Float.valueOf
+
+Features:
+
+* Exception-free alternatives to OpenJDKs Integer.valueOf, Double.valueOf and Float.valueOf for use in high-load scenarios
+* Parsing or regular expression based on a configurable set of optional features
 
 # License
 
