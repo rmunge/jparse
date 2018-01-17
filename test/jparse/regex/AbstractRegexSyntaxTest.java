@@ -20,8 +20,6 @@ import org.junit.Test;
  */
 public abstract class AbstractRegexSyntaxTest<CR> {
 
-
-
 	@Test
 	public void testUnicode() {
 		assertMatches(true, "♜♞♝♛♚♝♞♜", "♜♞♝♛♚♝♞♜");
@@ -127,10 +125,10 @@ public abstract class AbstractRegexSyntaxTest<CR> {
 	}
 
 	/**
-	 * Inside a character set, the dot loses its special meaning and matches a literal dot.
+	 * Inside a character classes, the dot loses its special meaning and matches a literal dot.
 	 */
 	@Test
-	public void testDotLineInsideCharacterSet() {
+	public void testDotInsideCharacterSet() {
 		assertMatches(true, ".", "[.]");
 	}
 
@@ -384,6 +382,14 @@ public abstract class AbstractRegexSyntaxTest<CR> {
 
 		assertMatches(true, "d", "[^xyz]");
 		assertMatches(true, "0", "[^xyz]");
+	}
+
+	@Test
+	public void testCharacterClassUnion() {
+
+		assertMatchesRange(true, 'a', 'd', "[a-d[m-p]]");
+		assertMatchesRange(false, 'e', 'l', "[a-d[m-p]]");
+		assertMatchesRange(true, 'm', 'p', "[a-d[m-p]]");
 	}
 
 	/**
@@ -850,6 +856,48 @@ public abstract class AbstractRegexSyntaxTest<CR> {
 		// \R ... Any Unicode linebreak sequence,
 		// Note: introduced in Java 8
 		assertMatchesEverySingleCharacter(true, "" + '\n' + '\u000B' + '\u000C' + '\r' + '\u0085' + '\u2028' + '\u2029', "\\R");
+	}
+
+	@Test
+	public void testQuotationSequence() {
+
+		assertMatches(true, "[name]", "\\Q[name]\\E");
+	}
+
+	@Test
+	public void testInlinedMatchFlags() {
+
+		// (?i) case insensitive
+		assertMatches(true, "aBc", "(?i)abc");
+		assertMatches(false, "aBc", "(?-i)abc");
+		assertMatches(false, "ς", "(?i)σ");
+
+		// (?u) Unicode-aware case folding
+		assertMatches(true, "ς", "(?i)(?u)σ");
+
+		// (?d) Unix lines mode
+		assertMatches(false, "\n", "(?d).");
+		assertMatches(true, "\r", "(?d).");
+		assertMatches(true, "\u2028", "(?d).");
+		assertMatches(true, "\u2029", "(?d).");
+
+		// (?s) dotall mode
+		assertMatches(true, "\n", "(?s).");
+		assertMatches(true, "\r", "(?s).");
+		assertMatches(true, "\u2028", "(?s).");
+		assertMatches(true, "\u2029", "(?s).");
+		assertMatches(true, "\r\n", "(?s)..");
+
+		// (?m) multiline mode
+		assertMatches(true, "line\nline\n", "(?m)(^line$\\n){2}");
+		assertMatches(false, "line\nline\n", "(?-m)(^line$\\n){2}");
+
+		// (?x) comments
+		assertMatches(true, "text", "(?x).*#example for a regex with a comment");
+		assertMatches(false, "text", "(?-x).*#example for a regex with a comment");
+
+		// (?U)
+		assertMatches(true, "ς", "(?U)\\p{Lower}");
 	}
 
 	private void assertMatchesSpaces(boolean matches, String regex) {

@@ -38,7 +38,7 @@ public enum RegexFeature implements java.io.Serializable {
 	/**
 	 * \A, the beginning of the input; an alternative to ^.
 	 */
-	AlternativeBegin("\\\\A, the beginning of the input", false),
+	AlternativeBegin("\\\\A, the beginning of the input; an alternative to ^", false),
 
 	/**
 	 * \z and \\Z, the end of the input and the end of the input but for the final terminator, if any.
@@ -52,9 +52,9 @@ public enum RegexFeature implements java.io.Serializable {
 	EndOfPreviousMatch("\\\\G, end of previous match", false),
 
 	/**
-	 * \h and \\H, horizontal whitespace and non horizontal whitespace.
+	 * \h and \\H, horizontal whitespace and non horizontal white space.
 	 */
-	HorizontalWhitespace("\\\\h and \\\\H, horizontal whitespace", false),
+	HorizontalWhitespace("\\\\h and \\\\H, horizontal white space", false),
 
 	/**
 	 * \R, any Unicode linebreak sequence.
@@ -64,12 +64,12 @@ public enum RegexFeature implements java.io.Serializable {
 	/**
 	 * \V, a non vertical whitespace
 	 */
-	NonVerticalWhitespace("\\\\V, a non vertical whitespace", false),
+	NonVerticalWhitespace("\\\\V, a non vertical white space", false),
 
 	/**
 	 * Named capturing groups (?&lt;name>) and references (\k&lt;name>).
 	 */
-	NamedCapturingGroupsAndReferences("Named capturing groups and references", false),
+	NamedCapturingGroupsAndReferences("Named capturing groups (?&lt;name>) and references (\\k&lt;name>)", false),
 
 	/**
 	 * (?<=X), zero-width positive lookbehind.
@@ -90,6 +90,16 @@ public enum RegexFeature implements java.io.Serializable {
 	 * Intersection within character classes (e.g. [a-z&&[aeiou]]).
 	 */
 	CharacterClassIntersection("Character Class Intersection (e.g. [a-z&&[aeiou]])", false),
+
+	/**
+	 * Union within character classes (e.g. [a-d[m-p]]).
+	 */
+	CharacterClassUnion("Character Class Unition (e.g. [a-d[m-p]])", false),
+
+	/**
+	 * Quotation Sequence (e.g. \Q[name]\E).
+	 */
+	QuotationSequence("Quotation Sequence (e.g. \\\\Q[name]\\\\E)", false),
 
 	/**
 	 * Exact quantifiers with zeros only (e.g. x{0,0} or x{0}).
@@ -114,7 +124,7 @@ public enum RegexFeature implements java.io.Serializable {
 	 * If this feature is disabled a maximum number of level of nested groups is enforced.
 	 * The allowed number is configurable through {@link RegexFeatureSet#setMaxNestedGroups(int). Default is 2 levels.
 	 */
-	Complexity_UnrestrictedNestedGroups("Unrestricted levels of nested groups, true", true),
+	Complexity_UnrestrictedNestedGroups("Unrestricted levels of nested groups", true),
 
 	/**
 	 * If this feature is disabled a maximum number of level of nested groups is enforced.

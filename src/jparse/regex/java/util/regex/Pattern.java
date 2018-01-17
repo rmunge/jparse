@@ -1656,6 +1656,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
         }
         if (i >= pLen - 1)    // No \Q sequence found
             return;
+
+        check(RegexFeature.QuotationSequence);
+
         int j = i;
         i += 2;
         int[] newtemp = new int[j + 3*(pLen-i) + 2];
@@ -2634,8 +2637,10 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
                     node = clazz(true);
                     if (prev == null)
                         prev = node;
-                    else
+                    else {
+                    	check(RegexFeature.CharacterClassUnion);
                         prev = union(prev, node);
+                    }
                     ch = peek();
                     continue;
                 case '&':
@@ -5430,6 +5435,7 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      */
     private static CharProperty union(final CharProperty lhs,
                                       final CharProperty rhs) {
+
         return new CharProperty() {
                 boolean isSatisfiedBy(int ch) {
                     return lhs.isSatisfiedBy(ch) || rhs.isSatisfiedBy(ch);}};

@@ -9,9 +9,16 @@ package jparse.regex;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import jparse.regex.java.util.regex.Pattern;
 
 import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 
@@ -23,7 +30,9 @@ import org.junit.Test;
  */
 public class RestrictedJavaSyntaxTest extends AbstractRegexSyntaxTest<Pattern> {
 
-	private RegexFeature expectedSyntaxExceptionFor;
+	private static Set<RegexFeature> featuresToTest = Collections.synchronizedSet(new HashSet<>());
+
+	private volatile RegexFeature expectedSyntaxExceptionFor;
 
 	@Test
 	@Override
@@ -225,6 +234,29 @@ public class RestrictedJavaSyntaxTest extends AbstractRegexSyntaxTest<Pattern> {
 		super.testNonVerticalWhitespace();
 	}
 
+	@Test
+	@Override
+	public void testCharacterClassUnion() {
+
+		expectSyntaxExceptionFor(RegexFeature.CharacterClassUnion);
+		super.testCharacterClassUnion();
+	}
+
+	@Test
+	@Override
+	public void testInlinedMatchFlags() {
+
+		expectSyntaxExceptionFor(RegexFeature.InlinedMatchFlags);
+		super.testInlinedMatchFlags();
+	}
+
+	@Test
+	@Override
+	public void testQuotationSequence() {
+
+		expectSyntaxExceptionFor(RegexFeature.QuotationSequence);
+		super.testQuotationSequence();
+	}
 
 
 	private void expectSyntaxExceptionFor(RegexFeature feature) {
@@ -233,7 +265,23 @@ public class RestrictedJavaSyntaxTest extends AbstractRegexSyntaxTest<Pattern> {
 
 	@After
 	public void clearExpectedSyntaxException() {
+		featuresToTest.remove(expectedSyntaxExceptionFor);
 		expectedSyntaxExceptionFor = null;
+	}
+
+	@BeforeClass
+	public static void setUp() {
+
+		for (RegexFeature feature : RegexFeature.values()) {
+			if (!feature.isComplixityFeature()) {
+				featuresToTest.add(feature);
+			}
+		}
+	}
+
+	@AfterClass
+	public static void tearDown() {
+		assertEquals("There must be no untested features", Collections.emptySet(), featuresToTest);
 	}
 
 	protected void assertMatches(boolean expected, String string, String pattern) {

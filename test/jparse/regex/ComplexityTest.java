@@ -73,6 +73,7 @@ public class ComplexityTest extends AbstractRegexSyntaxTest<Pattern> {
 
 	}
 
+
 	@Test
 	public void testOverlappingQuantifierTokens_IgnoreFirst() {
 
@@ -83,6 +84,8 @@ public class ComplexityTest extends AbstractRegexSyntaxTest<Pattern> {
 			FEATURES.setIgnoredOverlappingQuantifiers(1);
 			verifyNoSyntaxError(".*.*");
 			verifySyntaxError(RegexFeature.Complexity_OverlappingQuantifiedTokens, "a+.*.*");
+			verifySyntaxError(RegexFeature.Complexity_OverlappingQuantifiedTokens, "\\d+\\d*\\d+");
+
 
 		} finally {
 			FEATURES.setIgnoredOverlappingQuantifiers(defaultValue);

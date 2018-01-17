@@ -69,4 +69,7 @@
 			</plugin>
 		</plugins>
 	</build>
+	<issueManagement>
+		<url>https://github.com/rmunge/jparse/issues</url>
+	</issueManagement>
 </project>

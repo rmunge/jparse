@@ -231,6 +231,24 @@ public class XpressiveRegexSyntaxTest extends AbstractRegexSyntaxTest<CompileRes
 		super.testNonVerticalWhitespace();
 	}
 
+	@Test(expected = PatternSyntaxFeatureException.class)
+	@Override
+	public void testCharacterClassUnion() {
+		super.testCharacterClassUnion();
+	}
+
+	@Test(expected = PatternSyntaxFeatureException.class)
+	@Override
+	public void testInlinedMatchFlags() {
+		super.testInlinedMatchFlags();
+	}
+
+	@Test(expected = PatternSyntaxFeatureException.class)
+	@Override
+	public void testQuotationSequence() {
+		super.testQuotationSequence();
+	}
+
 	// --------------------------------------------------------------------------------------------------------
 	// --- Helper methods:
 

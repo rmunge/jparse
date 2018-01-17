@@ -63,6 +63,8 @@ public final class RegexFeatureSet implements Features, java.io.Serializable {
 		featureSet.setFeatureEnabled(RegexFeature.NamedCapturingGroupsAndReferences, false);
 		featureSet.setFeatureEnabled(RegexFeature.InlinedMatchFlags, false);
 		featureSet.setFeatureEnabled(RegexFeature.CharacterClassIntersection, false);
+		featureSet.setFeatureEnabled(RegexFeature.CharacterClassUnion, false);
+		featureSet.setFeatureEnabled(RegexFeature.QuotationSequence, false);
 
 		// According to documentation, the following two features are not be supported by BOOST expressive,
 		// but they seem to work. We follow the official documentation here and disable them.

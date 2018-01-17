@@ -230,6 +230,24 @@ public class ECMAScripSyntaxTest extends AbstractRegexSyntaxTest<jparse.regex.ja
 		super.testNonVerticalWhitespace();
 	}
 
+	@Test(expected = PatternSyntaxFeatureException.class)
+	@Override
+	public void testCharacterClassUnion() {
+		super.testCharacterClassUnion();
+	}
+
+	@Test(expected = PatternSyntaxFeatureException.class)
+	@Override
+	public void testInlinedMatchFlags() {
+		super.testInlinedMatchFlags();
+	}
+
+	@Test(expected = PatternSyntaxFeatureException.class)
+	@Override
+	public void testQuotationSequence() {
+		super.testQuotationSequence();
+	}
+
 	@Override
 	protected void assertMatches(boolean expected, String string, String pattern) {
 
