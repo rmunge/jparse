@@ -1,10 +1,3 @@
-/***************************************************
- * dynaTrace Diagnostics (c) dynaTrace software GmbH
- *
- * @file: NumberParserTest.java
- * @date: 19.05.2016
- * @author: roland.mungenast
- */
 package jparse;
 
 import static org.junit.Assert.assertEquals;

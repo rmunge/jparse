@@ -1,10 +1,3 @@
-/***************************************************
- * dynaTrace Diagnostics (c) dynaTrace software GmbH
- *
- * @file: ComplexRegexSyntaxTest.java
- * @date: 13.12.2017
- * @author: roland.mungenast
- */
 package jparse.regex;
 
 import static org.junit.Assert.assertEquals;

@@ -1,9 +1,26 @@
-/***************************************************
- * dynaTrace Diagnostics (c) dynaTrace software GmbH
+/*
+ * Copyright (c) 2003, rmunge and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
- * @file: RegexFeature.java
- * @date: 12.12.2017
- * @author: roland.mungenast
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  The author designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * in the LICENSE file that accompanied this code.
+ *
+ * This work contains modified source code from the OpenJDK project (package: jparse.sun.misc).
+ * The original source code is available here: http://hg.openjdk.java.net/jdk8.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
  */
 package jparse.regex;
 
